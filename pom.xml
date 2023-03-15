@@ -23,6 +23,7 @@
         <java.version>17</java.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <rider.version>1.35.0</rider.version>
+        <junit.extensions.version>2.6.0</junit.extensions.version>
     </properties>
 
     <dependencies>
@@ -71,6 +72,12 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.glytching</groupId>
+            <artifactId>junit-extensions</artifactId>
+            <version>${junit.extensions.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
