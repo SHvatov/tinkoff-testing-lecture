@@ -16,7 +16,7 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     public List<Client> getClients(GetClientsRequest request) {
-        return clientRepository.findAllByLastNameLike(request.lastName(), request.page()).toList();
+        return clientRepository.findAllByLastNameLike(request.lastName(), request.page());
     }
 
 }

@@ -15,13 +15,14 @@ import ru.tinkoff.lecture.testing.dto.GetClientsRequest;
 import ru.tinkoff.lecture.testing.model.Client;
 import ru.tinkoff.lecture.testing.repository.ClientRepository;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -53,9 +54,10 @@ class ClientServiceTest {
     @Test
     void getClientsTest() {
         when(clientRepository.findAllByLastNameLike(eq(LASTNAME), any()))
-                .thenReturn(Stream.of(RANDOM_CLIENT_1, RANDOM_CLIENT_2));
+                .thenReturn(List.of(RANDOM_CLIENT_1, RANDOM_CLIENT_2));
 
         var rq = new GetClientsRequest(10, 0, "firstName,asc", LASTNAME);
+
         var result = clientService.getClients(rq);
 
         assertEquals(2, result.size());
@@ -63,7 +65,7 @@ class ClientServiceTest {
         assertTrue(result.contains(RANDOM_CLIENT_2));
 
         var pageCaptor = ArgumentCaptor.forClass(Pageable.class); // @ArgumentCaptor
-        verify(clientRepository).findAllByLastNameLike(eq(LASTNAME), pageCaptor.capture());
+        verify(clientRepository, times(1)).findAllByLastNameLike(eq(LASTNAME), pageCaptor.capture());
 
         var page = pageCaptor.getValue();
         assertEquals(0, page.getPageNumber());

@@ -1,5 +1,7 @@
 package ru.tinkoff.lecture.testing.dto;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,14 +35,14 @@ class GetClientsRequestTest {
         System.out.println("\tВремя начала теста - " + LocalDateTime.now());
     }
 
-    @BeforeAll
+    @AfterAll
     static void afterAll() {
-        System.out.println("\tВремя завершения всех тестов - " + LocalDateTime.now());
+        System.out.println("Время завершения всех тестов - " + LocalDateTime.now());
     }
 
-    @BeforeEach
+    @AfterEach
     void afterEach() {
-        System.out.println("Время завершения теста - " + LocalDateTime.now());
+        System.out.println("\tВремя завершения теста - " + LocalDateTime.now());
     }
 
     @Test
