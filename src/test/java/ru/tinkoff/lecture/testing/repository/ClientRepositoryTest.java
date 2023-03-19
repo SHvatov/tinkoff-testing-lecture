@@ -93,7 +93,7 @@ class ClientRepositoryTest {
     @Disabled
     @DataSet("clients.yaml")
     void repositoryTest3() {
-        var rs = clientRepository.findAllByLastNameLike("Test%", Pageable.ofSize(10));
+        var rs = clientRepository.findAllByLastNameLike("Tet%", Pageable.ofSize(10));
         assertEquals(1, rs.size());
         assertContainsClient(rs, "Test", "Test");
     }
