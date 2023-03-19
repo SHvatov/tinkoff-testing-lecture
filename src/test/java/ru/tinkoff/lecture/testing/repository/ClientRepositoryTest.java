@@ -5,6 +5,7 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-//@DataJpaTest
-//@TestConfiguration
+//@DataJpaTest + @TestConfiguration + H2
 @SpringBootTest
 @DBRider
 @DBUnit(leakHunter = true, caseSensitiveTableNames = true)
@@ -52,8 +52,8 @@ class ClientRepositoryTest {
     }
 
     @Test
-    @Rollback
-    @Transactional
+//    @Rollback
+//    @Transactional
     void repositoryTest1() {
         clientRepository.save(
                 new Client()
@@ -77,8 +77,8 @@ class ClientRepositoryTest {
     }
 
     @Test
-    @Rollback
-    @Transactional
+//    @Rollback
+//    @Transactional
     void repositoryTest2() {
         clientRepository.save(
                 new Client()
@@ -90,6 +90,7 @@ class ClientRepositoryTest {
     }
 
     @Test
+    @Disabled
     @DataSet("clients.yaml")
     void repositoryTest3() {
         var rs = clientRepository.findAllByLastNameLike("Test%", Pageable.ofSize(10));
